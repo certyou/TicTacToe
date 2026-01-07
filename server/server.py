@@ -2,7 +2,7 @@ import socket
 import threading
 
 #HOST
-HOST = '127.0.0.1'
+HOST = '0.0.0.0'
 PORT = 5555
 
 # État du jeu
