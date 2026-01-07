@@ -17,8 +17,8 @@ def start_client():
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         client.connect((SERVER_IP, PORT))
-    except:
-        print("Impossible de se connecter au serveur.")
+    except Exception as e:
+        print(f"Impossible de se connecter au serveur: {e}")
         return
 
     while True:
