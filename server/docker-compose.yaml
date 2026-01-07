@@ -16,6 +16,7 @@ services:
     tty: true        # Nécessaire pour input()
     networks:
       - morpion-net
+    restart: always
 
 networks:
   morpion-net:
