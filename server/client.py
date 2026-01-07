@@ -1,9 +1,14 @@
 import socket
 import sys
+import time
 
 # Récupérer l'IP du serveur via argument ou env
 SERVER_IP = sys.argv[1] if len(sys.argv) > 1 else '127.0.0.1'
 PORT = 5555
+
+# Nombre de tentatives de connexion et délai entre chaque
+MAX_RETRIES = 10
+RETRY_DELAY = 2  # secondes
 
 def print_board(board_data):
     b = board_data.split(',')
@@ -15,11 +20,23 @@ def print_board(board_data):
 
 def start_client():
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    try:
-        client.connect((SERVER_IP, PORT))
-    except Exception as e:
-        print(f"Impossible de se connecter au serveur: {e}")
-        return
+    client.bind(('', PORT))
+
+    # Boucle de retry pour attendre que le serveur soit prêt
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            print(f"Tentative de connexion {attempt}/{MAX_RETRIES} à {SERVER_IP}:{PORT}...")
+            client.connect((SERVER_IP, PORT))
+            print("Connecté au serveur !")
+            break
+        except Exception as e:
+            print(f"Échec: {e}")
+            if attempt < MAX_RETRIES:
+                print(f"Nouvelle tentative dans {RETRY_DELAY}s...")
+                time.sleep(RETRY_DELAY)
+            else:
+                print("Impossible de se connecter au serveur après plusieurs tentatives.")
+                return
 
     while True:
         try:
