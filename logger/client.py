@@ -4,6 +4,7 @@ import sys
 # Récupérer l'IP du serveur via argument ou env
 SERVER_IP = sys.argv[1] if len(sys.argv) > 1 else '127.0.0.1'
 PORT = 5555
+print(SERVER_IP, PORT)
 
 def print_board(board_data):
     b = board_data.split(',')
@@ -16,9 +17,10 @@ def print_board(board_data):
 def start_client():
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
+        print("Connecting to server:", SERVER_IP, PORT)
         client.connect((SERVER_IP, PORT))
-    except:
-        print("Impossible de se connecter au serveur.")
+    except Exception as e:
+        print(f"Impossible de se connecter au serveur: {e}")
         return
 
     while True:
