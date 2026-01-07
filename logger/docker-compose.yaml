@@ -2,12 +2,12 @@ services:
   player-2:
     build: .
     # REMPLACE 192.168.1.10 PAR L'IP RÉELLE DE LA MACHINE A
-    command: python client.py 127.0.0.1
+    command: python client.py localhost
     stdin_open: true
     tty: true
     
   logger:
     build: .
-    command: python logger.py 127.0.0.1
+    command: python logger.py localhost
     volumes:
       - ./logs:/data # Pour récupérer le fichier log sur ta machine hôte

@@ -3,7 +3,6 @@ import sys
 
 SERVER_IP = sys.argv[1] if len(sys.argv) > 1 else '127.0.0.1'
 PORT = 5555
-print(SERVER_IP, PORT)
 
 def start_logger():
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
