@@ -1,0 +1,22 @@
+version: '3'
+services:
+  game-server:
+    build: .
+    command: python server.py
+    ports:
+      - "5555:5555" # Ouvre le port sur la machine physique
+    networks:
+      - morpion-net
+
+  player-1:
+    build: .
+    command: python client.py game-server # Se connecte en local via le nom du service
+    depends_on:
+      - game-server
+    stdin_open: true # Nécessaire pour input()
+    tty: true        # Nécessaire pour input()
+    networks:
+      - morpion-net
+
+networks:
+  morpion-net:
