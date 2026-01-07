@@ -3,7 +3,7 @@ import sys
 
 # Récupérer l'IP du serveur via argument ou env
 SERVER_IP = sys.argv[1] if len(sys.argv) > 1 else '127.0.0.1'
-PORT = 6666
+PORT = 5555
 print(SERVER_IP, PORT)
 
 def print_board(board_data):

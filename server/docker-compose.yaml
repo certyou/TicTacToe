@@ -3,7 +3,7 @@ services:
     build: .
     command: python server.py
     ports:
-      - "6666:5555" # Ouvre le port sur la machine physique
+      - "5555:5555" # Ouvre le port sur la machine physique
     networks:
       - morpion-net
 
